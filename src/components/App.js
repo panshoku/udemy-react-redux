@@ -1,38 +1,36 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-// 関数コンポーネント
-const App =() => {
-    return (
-        <Counter></Counter>
-    )
-}
+// ここで読んだものがプロップスに入る
+import { incre, decre } from '../actions'
 
-class Counter extends Component {
-    constructor(props) {　//初期
-        super(props) //　親クラスで初期化処理をする
-        this.state = { count: 0 } // 初期化時に対してオブジェクトが作成される
-    }
-
-    handlePlusButton = () => {
-        this.setState({count: this.state.count +1})
-
-    }
-
-    handleMinusButton = () => {
-        this.setState({count: this.state.count -1})
-    }
-
-    // stateのオブジェクトを作成してから、レンダーが実行される
+class App extends Component {
+    // アクションが起こってから、レンダーが実行
+    // つまり、アクションで状態が変化されてからレンダー
     render() {
+        const props = this.props
+
         return (
             <React.Fragment>
-                <div>{ this.state.count }</div>
-                <button onClick={this.handlePlusButton}>+1</button>
-                <button onClick={this.handleMinusButton}>-1</button>
+                <div>{ props.value }</div>
+                <button onClick={props.incre}>+1</button>
+                <button onClick={props.decre}>-1</button>
             </React.Fragment>
         )
     }
 }
 
-export default App
+// ステイトの状態から、このコンポーネントのプロップスにする
+// 状態のトップレベルのステイト引数
+//
+const mapStateToProps = (state) => ({value: state.count.value})
+
+// レデューサーに状態変化をさせる
+const mapDispatchToProps = (dispatch) => {
+    return {
+        incre: () => dispatch(incre()),
+        decre: () => dispatch(decre()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

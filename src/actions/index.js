@@ -10,6 +10,6 @@ export const incre = () => ({
     type: INCRE
 })
 
-export const incre = () => ({
+export const decre = () => ({
     type: DECRE
 })

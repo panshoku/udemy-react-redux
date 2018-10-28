@@ -8,7 +8,8 @@ export default (state = initialState, action) => {
             return { value: state.value +1 }
         case DECRE:
             return { value: state.value -1 }
-        default state
+        default:
+            return state
     }
 
 }
