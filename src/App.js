@@ -1,43 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 
 // 関数コンポーネント
 const App =() => {
-    const profiles =[
-        { name: "taro", age: 10},
-        { name: "hana", age: 11},
-        { name: "no"},
-    ]
     return (
-        <div>
-        {
-            // 配列.map()：全ての要素を呼び出す。ループ的な
-            // 配列.map(x => x*2) : 配列に入ってる要素がxに渡されて=>の処理をする
-            profiles.map((profile, index) => {
-                return <User name={profile.name} age={profile.age} key={index}/>
-            })
-        }
-            {/*
-                コンポーネントの属性。
-                コンポーネントに対して属しているもの。
-                Userコンポーネントに対して、taroというprops.thisができた。
-                Userの引数にpropsが使える。taroが入る。
-            */}
-        </div>
+        <Counter></Counter>
     )
 }
 
-const User = (props) => {
-    return (<p>i am {props.name}, {props.age}</p>)
+class Counter extends Component {
+    constructor(props) {　//初期
+        super(props) //　親クラスで初期化処理をする
+        this.state = { count: 0 } // 初期化時に対してオブジェクトが作成される
+    }
+
+    handlePlusButton = () => {
+        this.setState({count: this.state.count +1})
+
+    }
+
+    handleMinusButton = () => {
+        this.setState({count: this.state.count -1})
+    }
+
+    // stateのオブジェクトを作成してから、レンダーが実行される
+    render() {
+        return (
+            <React.Fragment>
+                <div>{ this.state.count }</div>
+                <button onClick={this.handlePlusButton}>+1</button>
+                <button onClick={this.handleMinusButton}>-1</button>
+            </React.Fragment>
+        )
+    }
 }
 
-User.propTypes = {
-    name: PropTypes.string,
-    age: PropTypes.number.isRequired,
-}
-
-User.defaultProps = {
-    age: 1
-}
-
-export default App;
+export default App
