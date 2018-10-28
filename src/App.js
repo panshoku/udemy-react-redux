@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // class App extends Component {
 //   render() {
@@ -6,18 +6,31 @@ import React, { Component } from 'react';
 //   }
 // }
 
-class App extends Component {
-  render() {
-      const greeting = "hello"
-      const dom = <h1 className="foo">{greeting}</h1>
-    // return dom
+// App クラスコンポーネント
+// class App extends Component {
+//   render() {
+//     return (
+//         <React.Fragment>
+//             <label htmlFor="bar">bar</label>
+//             <input type="text" onClick={()=>{console.log("hi")}} />
+//         </React.Fragment>
+//     )
+//   }
+// }
+
+// 関数コンポーネント
+const App =() => {
     return (
-        <React.Fragment>
-            <label htmlFor="bar">bar</label>
-            <input type="text" onClick={()=>{console.log("hi")}} />
-        </React.Fragment>
+        <div>
+            <Cat />
+            <Cat />
+            <Cat />
+            <Cat />
+        </div>
     )
-  }
 }
 
+const Cat = () => {
+    return (<p>me</p>)
+}
 export default App;
